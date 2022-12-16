@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { EqualityFn } from 'react-redux'
 
 export interface State {
     value: number
@@ -27,5 +28,7 @@ const example = createSlice({
     }
   }
 })
+
+export const equalityFunction: EqualityFn<State> = (exampleA, exampleB) => exampleA === exampleB;
 
 export default example
