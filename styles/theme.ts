@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material'
+import { enUS } from '@mui/material/locale'
 
 export default createTheme({
   components: {
@@ -11,4 +12,4 @@ export default createTheme({
       },
     },
   },
-})
+}, enUS)
