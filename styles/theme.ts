@@ -5,5 +5,10 @@ export default createTheme({
     MuiContainer: {
       defaultProps: { maxWidth: 'sm' },
     },
+    MuiAppBar: {
+      styleOverrides: {
+        root: { marginBottom: '2rem' },
+      },
+    },
   },
 })
