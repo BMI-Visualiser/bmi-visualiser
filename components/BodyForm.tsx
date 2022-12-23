@@ -1,9 +1,8 @@
-import FormControl from '@mui/material/FormControl';
-import Grid from '@mui/material/Grid';
-import InputLabel from '@mui/material/InputLabel';
-import Input from '@mui/material/Input';
-import FormHelperText from '@mui/material/FormHelperText';
-import { ChangeEventHandler, useCallback, useEffect, useState } from 'react';
+import Grid from '@mui/material/Grid'
+import { useValue as useProfileValue, actionCreators as profileActionCreators } from '@redux/slices/main/profile'
+import TextField, { TextFieldProps } from '@mui/material/TextField'
+import { useDispatch } from 'react-redux'
+import { useCallback } from 'react'
 
 const lang = {
   weightKg: 'Weight (kg)',
@@ -11,54 +10,49 @@ const lang = {
   heightCm: 'Height (cm)',
   heightFt: 'Feet',
   heightIn: 'Inch',
-};
-
-type WeightKg = number;
-type HeightCm = number;
-
-const defaultWeightKg = 60;
-const defaultHeightCm = 160;
-
-export interface Props {
-  onChange: (weightKg: WeightKg, heightCm: HeightCm) => void
 }
 
-export default function BodyForm(props: Props) {
-  const { onChange } = props;
-  const [weightKg, setWeightKg] = useState<WeightKg>(defaultWeightKg);
-  const [heightCm, setHeightCm] = useState<HeightCm>(defaultHeightCm);
+export default function BodyForm() {
+  const {
+    weightKg,
+    heightCm,
+  } = useProfileValue()
+  const dispatch = useDispatch();
 
-  const onWeightKgInputChange = useCallback<ChangeEventHandler<HTMLInputElement>>(event => { setWeightKg(parseInt(event.target.value) || 0); }, [setWeightKg]);
-  const onHeightCmInputChange = useCallback<ChangeEventHandler<HTMLInputElement>>(event => { setHeightCm(parseInt(event.target.value) || 0); }, [setHeightCm]);
-
-  useEffect(() => {
-    onChange(weightKg, heightCm);
-  }, [onChange, weightKg, heightCm]);
+  const onWeightKgTextFieldChange = useCallback<NonNullable<TextFieldProps['onChange']>>((event) => { dispatch(profileActionCreators.setWeightKg(event.target.value)); }, [dispatch])
+  const onHeightCmTextFieldChange = useCallback<NonNullable<TextFieldProps['onChange']>>((event) => { dispatch(profileActionCreators.setHeightCm(event.target.value)); }, [dispatch])
 
   return (
-    <Grid container spacing={2}>
-      <Grid item sm={6}>
-        <FormControl fullWidth>
-          <InputLabel htmlFor="weight">{lang.weightKg}</InputLabel>
-          <Input
+    <form>
+      <Grid container spacing={2}>
+        <Grid item sm={4}>
+          <TextField
             type="number"
-            name="weight"
+            name="weightKg"
+            label={lang.weightKg}
             value={weightKg}
-            onChange={onWeightKgInputChange}
+            onChange={onWeightKgTextFieldChange}
           />
-        </FormControl>
-      </Grid>
-      <Grid item sm={6}>
-        <FormControl fullWidth>
-          <InputLabel htmlFor="height">{lang.heightCm}</InputLabel>
-          <Input
+        </Grid>
+        <Grid item sm={4}>
+          <TextField
             type="number"
-            name="height"
+            name="heightCm"
+            label={lang.heightCm}
             value={heightCm}
-            onChange={onHeightCmInputChange}
+            onChange={onHeightCmTextFieldChange}
           />
-        </FormControl>
+        </Grid>
+        <Grid item sm={4}>
+          <TextField
+            type="number"
+            name="weightKg"
+            label={lang.weightKg}
+            value={weightKg}
+            disabled
+          />
+        </Grid>
       </Grid>
-    </Grid>
+    </form>
   )
 }

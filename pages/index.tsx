@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main>
       <Container>
-        <BodyForm onChange={console.log} />
+        <BodyForm />
       </Container>
     </main>
   )
