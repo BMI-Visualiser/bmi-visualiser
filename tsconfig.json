@@ -17,8 +17,11 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
+      "@customTypes": ["customTypes"],
+      "@customTypes/*": ["customTypes/*"],
       "@jotai/*": ["jotai/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

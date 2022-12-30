@@ -5,6 +5,7 @@ import TextField, { TextFieldProps } from '@mui/material/TextField'
 import { useAtom } from 'jotai'
 import { useCallback } from 'react'
 import { useLang } from '@jotai/atoms/lang'
+import calculateBmi from '@utils/calculateBmi'
 
 export default function BodyForm() {
   const [weight, setWeight] = useAtom(weightAtom)
@@ -13,6 +14,9 @@ export default function BodyForm() {
 
   const onWeightKgTextFieldChange = useCallback<NonNullable<TextFieldProps['onChange']>>((event) => { setWeight(parseInt(event.target.value)) }, [setWeight])
   const onHeightCmTextFieldChange = useCallback<NonNullable<TextFieldProps['onChange']>>((event) => { setHeight(parseInt(event.target.value)) }, [setHeight])
+
+  const bmi = calculateBmi(weight, height)
+  const bmiRound = Math.round(bmi * 100) / 100
 
   return (
     <form>
@@ -40,8 +44,8 @@ export default function BodyForm() {
             type="number"
             name="weightKg"
             label={lang.weightKg}
-            value={weight}
-            disabled
+            value={bmiRound}
+            inputProps={{ readOnly: true }}
           />
         </Grid>
       </Grid>

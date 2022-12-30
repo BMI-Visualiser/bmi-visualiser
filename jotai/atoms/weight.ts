@@ -1,6 +1,7 @@
+import { Weight } from '@customTypes'
 import { atom } from 'jotai'
 
-export type Type = number
+export type Type = Weight
 
 export const getDefaultValue: () => Type = () => 60
 

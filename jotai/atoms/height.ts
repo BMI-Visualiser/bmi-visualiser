@@ -1,6 +1,7 @@
+import { Height } from '@customTypes'
 import { atom } from 'jotai'
 
-export type Type = number
+export type Type = Height
 
 export const getDefaultValue: () => Type = () => 160
 
