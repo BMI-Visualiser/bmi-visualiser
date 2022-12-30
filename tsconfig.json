@@ -19,6 +19,7 @@
       "@components/*": ["components/*"],
       "@customTypes": ["customTypes"],
       "@customTypes/*": ["customTypes/*"],
+      "@hooks/*": ["hooks/*"],
       "@jotai/*": ["jotai/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
