@@ -17,7 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
-      "@redux/*": ["redux/*"],
+      "@jotai/*": ["jotai/*"],
       "@styles/*": ["styles/*"]
     }
   },

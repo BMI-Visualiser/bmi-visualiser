@@ -1,26 +1,18 @@
+import weightAtom from '@jotai/atoms/weight'
+import heightAtom from '@jotai/atoms/height'
 import Grid from '@mui/material/Grid'
-import { useValue as useProfileValue, actionCreators as profileActionCreators } from '@redux/slices/main/profile'
 import TextField, { TextFieldProps } from '@mui/material/TextField'
-import { useDispatch } from 'react-redux'
+import { useAtom } from 'jotai'
 import { useCallback } from 'react'
-
-const lang = {
-  weightKg: 'Weight (kg)',
-  weightLb: 'Weight (lbs)',
-  heightCm: 'Height (cm)',
-  heightFt: 'Feet',
-  heightIn: 'Inch',
-}
+import { useLang } from '@jotai/atoms/lang'
 
 export default function BodyForm() {
-  const {
-    weightKg,
-    heightCm,
-  } = useProfileValue()
-  const dispatch = useDispatch();
+  const [weight, setWeight] = useAtom(weightAtom)
+  const [height, setHeight] = useAtom(heightAtom)
+  const lang = useLang();
 
-  const onWeightKgTextFieldChange = useCallback<NonNullable<TextFieldProps['onChange']>>((event) => { dispatch(profileActionCreators.setWeightKg(event.target.value)); }, [dispatch])
-  const onHeightCmTextFieldChange = useCallback<NonNullable<TextFieldProps['onChange']>>((event) => { dispatch(profileActionCreators.setHeightCm(event.target.value)); }, [dispatch])
+  const onWeightKgTextFieldChange = useCallback<NonNullable<TextFieldProps['onChange']>>((event) => { setWeight(parseInt(event.target.value)) }, [setWeight])
+  const onHeightCmTextFieldChange = useCallback<NonNullable<TextFieldProps['onChange']>>((event) => { setHeight(parseInt(event.target.value)) }, [setHeight])
 
   return (
     <form>
@@ -30,7 +22,7 @@ export default function BodyForm() {
             type="number"
             name="weightKg"
             label={lang.weightKg}
-            value={weightKg}
+            value={weight}
             onChange={onWeightKgTextFieldChange}
           />
         </Grid>
@@ -39,7 +31,7 @@ export default function BodyForm() {
             type="number"
             name="heightCm"
             label={lang.heightCm}
-            value={heightCm}
+            value={height}
             onChange={onHeightCmTextFieldChange}
           />
         </Grid>
@@ -48,7 +40,7 @@ export default function BodyForm() {
             type="number"
             name="weightKg"
             label={lang.weightKg}
-            value={weightKg}
+            value={weight}
             disabled
           />
         </Grid>
