@@ -17,6 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
+      "@config": ["config"],
+      "@config/*": ["config/*"],
       "@customTypes": ["customTypes"],
       "@customTypes/*": ["customTypes/*"],
       "@hooks/*": ["hooks/*"],

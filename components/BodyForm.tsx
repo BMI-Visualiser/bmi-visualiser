@@ -55,5 +55,5 @@ export default function BodyForm() {
 }
 
 const RootStyle: SystemStyleObject<Theme> = {
-  marginBottom: 2,
+  mb: 2,
 }

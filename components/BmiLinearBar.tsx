@@ -1,10 +1,9 @@
 import { Theme, Typography } from "@mui/material"
 import { SystemStyleObject } from "@mui/system"
 import Box from "@mui/material/Box"
-import { useAtomValue } from "jotai"
-import heightAtom from "@jotai/atoms/heightAtom"
 import useBmi from "hooks/useBmi"
 import { useLang } from "@jotai/atoms/langAtom"
+import config from "@config"
 
 /**
  * This line will be showing:
@@ -17,15 +16,16 @@ import { useLang } from "@jotai/atoms/langAtom"
  * The following won't be showing on the line. For reference only:
  * Class 3 Obesity >40
  */
-const underweightMin = 15
-const underweightMax = 18.5
-const normalWeightMax = 25
-const overweightMax = 30
-const classOneObesityMax = 35
-const classTwoObesityMax = 40
+const {
+  underweightMin,
+  underweightMax,
+  normalWeightMax,
+  overweightMax,
+  classOneObesityMax,
+  classTwoObesityMax,
+} = config
 
 export default function BmiLinearBar () {
-  const height = useAtomValue(heightAtom)
   const lang = useLang()
   const bmi = useBmi()
   const left = (((bmi - underweightMin) / (classTwoObesityMax - underweightMin)) * 100) + '%'
@@ -50,6 +50,7 @@ export default function BmiLinearBar () {
 
 const RootStyle: SystemStyleObject<Theme> = {
   position: 'relative',
+  mb: 2,
 }
 
 const MarkerStyle: SystemStyleObject<Theme> = {
