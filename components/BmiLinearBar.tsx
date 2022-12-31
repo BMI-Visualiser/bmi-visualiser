@@ -28,10 +28,10 @@ const {
 export default function BmiLinearBar () {
   const lang = useLang()
   const bmi = useBmi()
-  const left = (((bmi - underweightMin) / (classTwoObesityMax - underweightMin)) * 100) + '%'
+  const top = (((bmi - underweightMin) / (classTwoObesityMax - underweightMin)) * 100) + '%'
   return (
     <Box sx={RootStyle}>
-      <Box sx={[MarkerStyle, { left }]} />
+      <Box sx={[MarkerStyle, { top }]} />
       <Box sx={LineStyle}>
         {/* Underweight 15-18.5 */}
         <Box sx={UnderweightStyle}><Typography variant="body2" sx={LightTextStyle}>{lang.underweight}<br />15-18.5</Typography></Box>
@@ -54,20 +54,23 @@ const RootStyle: SystemStyleObject<Theme> = {
 }
 
 const MarkerStyle: SystemStyleObject<Theme> = {
-  position: 'relative',
+  position: 'absolute',
   width: 0,
   height: 0,
-  borderLeft: '.6rem solid transparent',
-  borderRight: '.6rem solid transparent',
-  borderTop: '.6rem solid',
-  borderTopColor: 'common.black',
-  ml: '-.6rem',
-  transition: '.4s left',
+  borderBottom: '.6rem solid transparent',
+  borderTop: '.6rem solid transparent',
+  borderLeft: '.6rem solid',
+  borderLeftColor: 'common.black',
+  mt: '-.6rem',
+  transition: '.4s top',
 }
 
 const LineStyle: SystemStyleObject<Theme> = {
+  position: 'relative',
   display: 'flex',
-  height: '3rem',
+  flexDirection: 'column',
+  height: '30rem',
+  ml: '.6rem',
 }
 
 const LinePartCommonStyle = {
@@ -79,25 +82,25 @@ const LinePartCommonStyle = {
 
 const UnderweightStyle: SystemStyleObject<Theme> = {
   ...LinePartCommonStyle,
-  width: (((underweightMax - underweightMin) / (classTwoObesityMax - underweightMin)) * 100) + '%',
+  height: (((underweightMax - underweightMin) / (classTwoObesityMax - underweightMin)) * 100) + '%',
   backgroundColor: 'primary.light',
 }
 
 const NormalWeightStyle: SystemStyleObject<Theme> = {
   ...LinePartCommonStyle,
-  width: (((normalWeightMax - underweightMax) / (classTwoObesityMax - underweightMin)) * 100) + '%',
+  height: (((normalWeightMax - underweightMax) / (classTwoObesityMax - underweightMin)) * 100) + '%',
   backgroundColor: 'success.light',
 }
 
 const OverweightStyle: SystemStyleObject<Theme> = {
   ...LinePartCommonStyle,
-  width: (((overweightMax - normalWeightMax) / (classTwoObesityMax - underweightMin)) * 100) + '%',
+  height: (((overweightMax - normalWeightMax) / (classTwoObesityMax - underweightMin)) * 100) + '%',
   backgroundColor: 'warning.light',
 }
 
 const ClassOneObesityStyle: SystemStyleObject<Theme> = {
   ...LinePartCommonStyle,
-  width: (((classOneObesityMax - overweightMax) / (classTwoObesityMax - underweightMin)) * 100) + '%',
+  height: (((classOneObesityMax - overweightMax) / (classTwoObesityMax - underweightMin)) * 100) + '%',
   backgroundColor: 'error.light',
 }
 

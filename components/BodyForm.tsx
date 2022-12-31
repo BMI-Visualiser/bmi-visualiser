@@ -22,41 +22,40 @@ export default function BodyForm() {
 
   return (
     <Box component="form" sx={RootStyle}>
-      <Grid container spacing={2}>
-        <Grid item sm={4}>
-          <TextField
-            type="number"
-            name="weightKg"
-            label={lang.weightKg}
-            value={weight}
-            onChange={onWeightKgTextFieldChange}
-            onFocus={onFocusSelectAll}
-          />
-        </Grid>
-        <Grid item sm={4}>
-          <TextField
-            type="number"
-            name="heightCm"
-            label={lang.heightCm}
-            value={height}
-            onChange={onHeightCmTextFieldChange}
-            onFocus={onFocusSelectAll}
-          />
-        </Grid>
-        <Grid item sm={4}>
-          <TextField
-            type="number"
-            name="bmi"
-            label={lang.yourBmi}
-            value={bmi}
-            inputProps={{ readOnly: true }}
-          />
-        </Grid>
-      </Grid>
+      <TextField
+        type="number"
+        name="weightKg"
+        label={lang.weightKg}
+        value={weight}
+        onChange={onWeightKgTextFieldChange}
+        onFocus={onFocusSelectAll}
+        sx={TextFieldStyle}
+      />
+      <TextField
+        type="number"
+        name="heightCm"
+        label={lang.heightCm}
+        value={height}
+        onChange={onHeightCmTextFieldChange}
+        onFocus={onFocusSelectAll}
+        sx={TextFieldStyle}
+      />
+      <TextField
+        type="number"
+        name="bmi"
+        label={lang.yourBmi}
+        value={bmi}
+        inputProps={{ readOnly: true }}
+        sx={TextFieldStyle}
+      />
     </Box>
   )
 }
 
 const RootStyle: SystemStyleObject<Theme> = {
+  mb: 2,
+}
+
+const TextFieldStyle: SystemStyleObject<Theme> = {
   mb: 2,
 }
