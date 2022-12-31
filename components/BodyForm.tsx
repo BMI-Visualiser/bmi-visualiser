@@ -14,6 +14,7 @@ export default function BodyForm() {
   const [height, setHeight] = useAtom(heightAtom)
   const lang = useLang();
 
+  const onFocusSelectAll = useCallback<NonNullable<TextFieldProps['onFocus']>>(event => { event.target.select() }, []);
   const onWeightKgTextFieldChange = useCallback<NonNullable<TextFieldProps['onChange']>>((event) => { setWeight(parseInt(event.target.value)) }, [setWeight])
   const onHeightCmTextFieldChange = useCallback<NonNullable<TextFieldProps['onChange']>>((event) => { setHeight(parseInt(event.target.value)) }, [setHeight])
 
@@ -29,6 +30,7 @@ export default function BodyForm() {
             label={lang.weightKg}
             value={weight}
             onChange={onWeightKgTextFieldChange}
+            onFocus={onFocusSelectAll}
           />
         </Grid>
         <Grid item sm={4}>
@@ -38,6 +40,7 @@ export default function BodyForm() {
             label={lang.heightCm}
             value={height}
             onChange={onHeightCmTextFieldChange}
+            onFocus={onFocusSelectAll}
           />
         </Grid>
         <Grid item sm={4}>
