@@ -1,7 +1,6 @@
 import config from "@config"
 import { Height, Weight } from "@customTypes"
-import roundDecimal from "./roundDecimal"
-
+import calculateWeightByBmi from "./calculateWeightByBmi"
 
 export type ReturnValue = [Weight, Weight]
 
@@ -17,9 +16,8 @@ const {
  *
  */
 export default function calculateNormalRange (height: Height): ReturnValue {
-  const heightM = (height / 100)
-  const heightMSquare = heightM * heightM
-  const min = roundDecimal(underweightMax * heightMSquare)
-  const max = roundDecimal(normalWeightMax * heightMSquare)
-  return [min, max]
+  return [
+    calculateWeightByBmi(underweightMax, height),
+    calculateWeightByBmi(normalWeightMax, height),
+  ]
 }
